@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <!--<context:component-scan base-package="org.example"/>-->
+    <bean id="country" class="org.example.India">
+        <constructor-arg index="0" value="26"/>
+        <constructor-arg index="1" value="Tiranga"/>
+    </bean>
+    <bean id="mh" class="org.example.Maharashtra" parent="country">
+        <property name="noOfDistricts">
+            <value>35</value>
+        </property>
+        <property name="language">
+            <value>Marathi</value>
+        </property>
+        <property name="government" ref="govt"/>
+    </bean>
+
+    <bean id="govt" class="org.example.Government" init-method = "init" destroy-method = "destroy">
+        <property name="primeMinister">
+            <value>Narendra Modi</value>
+        </property>
+        <property name="ministries">
+            <value>57</value>
+        </property>
+    </bean>
+    <bean class="org.example.PrintMe"/>
+
+    <bean id = "government" class = "org.example.Government">
+    </bean>
+
+    <bean id = "specialities" class = "org.example.Specialities">
+        <property name = "trophies">
+            <list>
+                <value>Cricket World Cup</value>
+                <value>ICC World Twenty20</value>
+                <value>ICC Champions Trophy</value>
+            </list>
+        </property>
+        <property name = "wonders">
+            <set>
+                <value>Taj Mahal</value>
+                <value>Nalanda</value>
+            </set>
+        </property>
+        <property name = "populationOfStates">
+            <map>
+                <entry key = "Maharashtra" value = "11,23,74,333"/>
+                <entry key = "Uttar Pradesh" value = "19,98,12,341"/>
+                <entry key = "Delhi" value = "1,67,87,941"/>
+                <entry key = "Rajsthan" value = "6,85,48,437"/>
+            </map>
+        </property>
+        <property name = "famousFoodOfStates">
+            <props>
+                <prop key = "Maharashtra">Puran Poli</prop>
+                <prop key = "Gujrat">Dhokla</prop>
+                <prop key = "Rajsthan">Dal Baati</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
